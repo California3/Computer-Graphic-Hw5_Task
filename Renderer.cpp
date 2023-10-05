@@ -218,14 +218,14 @@ Vector3f castRay(
                 //                     distance. That is, 
                 //                     specularColor = IncidentEnergy * Ks * (<reflected_ray, view_dir>^specularExponent)
                 //                     where <v1,v2> is the nonnegative dot product between two vectors v1 and v2
-                Vector3f mirrorColor = 0, specularColor = 0;
+                Vector3f specularColor = 0;
 
                 // mirror reflection same in GLASS case
-                Vector3f reflectionDirection = normalize(reflect(dir, N));
-                Vector3f reflectionRayOrig = (dotProduct(reflectionDirection, N) < 0) ?
+                Vector3f reflectionDirection_ = normalize(reflect(dir, N));
+                Vector3f reflectionRayOrig = (dotProduct(reflectionDirection_, N) < 0) ?
                                              hitPoint - N * scene.epsilon :
                                              hitPoint + N * scene.epsilon;
-                Vector3f reflectionColor = castRay(reflectionRayOrig, reflectionDirection, scene, depth + 1);
+                Vector3f reflectionColor = castRay(reflectionRayOrig, reflectionDirection_, scene, depth + 1);
                 float kr = fresnel(dir, N, payload->hit_obj->ior);
 
                 // specularColor component in Phong model
@@ -235,7 +235,7 @@ Vector3f castRay(
                     // square of the distance between hitPoint and the light
                     float lightDistance2 = dotProduct(lightDir, lightDir);
                     lightDir = normalize(lightDir);
-                    Vector3f IncidentEnergy = light->intensity /  (lightDistance2 * 4 * M_PI);
+                    Vector3f IncidentEnergy = light->intensity /  (lightDistance2);
 
                     Vector3f reflectionDirection = reflect(-lightDir, N);
                     specularColor += powf(std::max(0.f, -dotProduct(reflectionDirection, dir)),
