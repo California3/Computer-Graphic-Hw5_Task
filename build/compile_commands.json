@@ -1,0 +1,17 @@
+[
+{
+  "directory": "/mnt/Code/8610/cg-hw5/COMP-4610-8610-HW5-20231003/Code/build",
+  "command": "/usr/bin/g++   -g -Wall -Wextra -pedantic -Wshadow -Wreturn-type -fsanitize=undefined -o CMakeFiles/RayTracing.dir/main.cpp.o -c /mnt/Code/8610/cg-hw5/COMP-4610-8610-HW5-20231003/Code/main.cpp",
+  "file": "/mnt/Code/8610/cg-hw5/COMP-4610-8610-HW5-20231003/Code/main.cpp"
+},
+{
+  "directory": "/mnt/Code/8610/cg-hw5/COMP-4610-8610-HW5-20231003/Code/build",
+  "command": "/usr/bin/g++   -g -Wall -Wextra -pedantic -Wshadow -Wreturn-type -fsanitize=undefined -o CMakeFiles/RayTracing.dir/Scene.cpp.o -c /mnt/Code/8610/cg-hw5/COMP-4610-8610-HW5-20231003/Code/Scene.cpp",
+  "file": "/mnt/Code/8610/cg-hw5/COMP-4610-8610-HW5-20231003/Code/Scene.cpp"
+},
+{
+  "directory": "/mnt/Code/8610/cg-hw5/COMP-4610-8610-HW5-20231003/Code/build",
+  "command": "/usr/bin/g++   -g -Wall -Wextra -pedantic -Wshadow -Wreturn-type -fsanitize=undefined -o CMakeFiles/RayTracing.dir/Renderer.cpp.o -c /mnt/Code/8610/cg-hw5/COMP-4610-8610-HW5-20231003/Code/Renderer.cpp",
+  "file": "/mnt/Code/8610/cg-hw5/COMP-4610-8610-HW5-20231003/Code/Renderer.cpp"
+}
+]

@@ -1,0 +1,3 @@
+/mnt/Code/8610/cg-hw5/COMP-4610-8610-HW5-20231003/Code/build/CMakeFiles/RayTracing.dir
+/mnt/Code/8610/cg-hw5/COMP-4610-8610-HW5-20231003/Code/build/CMakeFiles/edit_cache.dir
+/mnt/Code/8610/cg-hw5/COMP-4610-8610-HW5-20231003/Code/build/CMakeFiles/rebuild_cache.dir
