@@ -36,18 +36,49 @@ int main()
     //// fill in 8 vertices of the cube, you may move or rotate it so it is more visible
     //// for example, by centering it at (0,0,-5) and rotating 20 degrees
     //// about y and z axes
-    // Vector3f cube_verts[8] = { ... }; 
+    bool enable_cube = false;
+    if(enable_cube){
+        // center at (0, 0, 0)
+        Vector3f cube_verts[8] = {{-1, -1, -1}, {-1, -1, 1}, {-1, 1, -1}, {-1, 1, 1},
+                                {1, -1, -1}, {1, -1, 1}, {1, 1, -1}, {1, 1, 1}}; 
 
-    //// fill in 6x2 triangles of the cube, the orientation of triangle is determined 
-    //// by ordering of vertices using the right hand rule
-    // uint32_t cube_vertIndex[36] = { ... }; 
+        // center at (0, 0, -5)
+        for (int i = 0; i < 8; i++) {
+            cube_verts[i].z -= 5;
+        }
 
-    //// these textures are set to all zeros since they are never used
-    // Vector2f cube_st[8] = {{0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}};
-    // auto cube_mesh = std::make_unique<MeshTriangle>(cube_verts, cube_vertIndex, 12, cube_st);
-    // cube_mesh->ior = 3.0;
-    // cube_mesh->materialType = GLASS;
-    // scene.Add(std::move(cube_mesh));
+        // rotate 20 degrees about z axes
+        float theta = 20.0 * M_PI / 180.0;
+        for (int i = 0; i < 8; i++) {
+            float x = cube_verts[i].x;
+            float y = cube_verts[i].y;
+            cube_verts[i].x = x * cos(theta) - y * sin(theta);
+            cube_verts[i].y = x * sin(theta) + y * cos(theta);
+        }
+        // rotate 20 degrees about y axes
+        for (int i = 0; i < 8; i++) {
+            float x = cube_verts[i].x;
+            float z = cube_verts[i].z;
+            cube_verts[i].x = x * cos(theta) + z * sin(theta);
+            cube_verts[i].z = -x * sin(theta) + z * cos(theta);
+        }
+
+        //// fill in 6x2 triangles of the cube, the orientation of triangle is determined 
+        //// by ordering of vertices using the right hand rule
+        uint32_t cube_vertIndex[36] = {0, 1, 2, 1, 3, 2, 
+                                    1, 0, 4, 1, 4, 5, 
+                                    0, 2, 4, 2, 6, 4, 
+                                    1, 5, 3, 3, 5, 7, 
+                                    2, 3, 6, 3, 7, 6, 
+                                    4, 6, 5, 5, 6, 7}; 
+
+        //// these textures are set to all zeros since they are never used
+        Vector2f cube_st[8] = {{0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}};
+        auto cube_mesh = std::make_unique<MeshTriangle>(cube_verts, cube_vertIndex, 12, cube_st);
+        cube_mesh->ior = 3.0;
+        cube_mesh->materialType = GLASS;
+        scene.Add(std::move(cube_mesh));
+    }
     //// end adding cube
     
 
