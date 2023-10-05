@@ -268,7 +268,7 @@ void Renderer::Render(const Scene& scene)
             // Guangming Zeng:
             // map (0~width, 0~height) to (-1~1, -1~1) then use scale and aspect ratio to get (x, y)
             // irrelevant to z.
-            // suppose (0,0) is at the bottom left corner of the screen (image).
+            // suppose screen (0,0) is at the bottom left corner of the screen (image).
             x = (2 * (i + 0.5) / (float)scene.width - 1) * scale * imageAspectRatio;
             y = (2 * (j + 0.5) / (float)scene.height - 1) * scale;
 

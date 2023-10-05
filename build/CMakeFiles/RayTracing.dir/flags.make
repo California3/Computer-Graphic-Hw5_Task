@@ -6,5 +6,5 @@ CXX_DEFINES =
 
 CXX_INCLUDES = 
 
-CXX_FLAGS = -g -Wall -Wextra -pedantic -Wshadow -Wreturn-type -fsanitize=undefined
+CXX_FLAGS = -Os -DNDEBUG -Wall -Wextra -pedantic -Wshadow -Wreturn-type -fsanitize=undefined
 
