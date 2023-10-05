@@ -175,6 +175,28 @@ Vector3f castRay(
 
                 // The final hitColor should be hitColor = diffuseColor * IncidentEnergy * cos(incident_angle)
                 // Note the factor Kd is never used here
+                Vector3f lightAmt = 0;
+                Vector3f shadowPointOrig = (dotProduct(dir, N) < 0) ?
+                                           hitPoint + N * scene.epsilon :
+                                           hitPoint - N * scene.epsilon;
+
+                for (auto& light : scene.get_lights()) {
+                    Vector3f lightDir = light->position - hitPoint;
+                    // square of the distance between hitPoint and the light
+                    float lightDistance2 = dotProduct(lightDir, lightDir);
+                    lightDir = normalize(lightDir);
+                    float LdotN = std::max(0.f, dotProduct(lightDir, N)); // cos(incident_angle)
+
+                    // is the point in shadow, and is the nearest occluding object closer to the object than the light itself?
+                    auto shadow_res = trace(shadowPointOrig, lightDir, scene.get_objects());
+                    bool inShadow = shadow_res && (shadow_res->tNear * shadow_res->tNear < lightDistance2);
+
+                    Vector3f IncidentEnergy = light->intensity / (lightDistance2);
+
+                    lightAmt += inShadow ? 0 : IncidentEnergy * LdotN; // IncidentEnergy * cos(incident_angle)
+                }
+
+                hitColor = payload->hit_obj->evalDiffuseColor(st) * lightAmt; // diffuseColor * IncidentEnergy * cos(incident_angle)
                 break;
             }
 #endif
