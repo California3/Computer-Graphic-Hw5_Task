@@ -7,7 +7,7 @@
 #define M_PI 3.14159265358979323846
 
 #define BONUS_TASK_1
-// #define BONUS_TASK_2
+#define BONUS_TASK_2
 
 
 #if defined(BONUS_TASK_1) || defined(BONUS_TASK_2) 
